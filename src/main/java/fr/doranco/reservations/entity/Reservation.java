@@ -1,9 +1,12 @@
 package fr.doranco.reservations.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Reservation {
+public class Reservation implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String ref;
 	private Date dateDebut;
