@@ -11,7 +11,8 @@ public class UserDao implements IUserDao {
 	private Session session = HibernateConnector.getInstance().getSession();
 	@Override
 	public User getUserById(Integer id) {
-		// TODO Auto-generated method stub
+		User user = session.get(User.class, id);
+		
 		return null;
 	}
 
