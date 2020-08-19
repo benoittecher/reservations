@@ -23,8 +23,8 @@ public class UserControl implements IUserControl{
 	}
 
 	@Override
-	public void removePersonne(User user) {
-		userDao.removePersonne(user);
+	public void removeUser(User user) {
+		userDao.removeUser(user);
 		
 	}
 
