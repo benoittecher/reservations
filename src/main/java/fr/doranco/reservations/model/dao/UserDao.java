@@ -1,9 +1,6 @@
 package fr.doranco.reservations.model.dao;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import fr.doranco.reservations.entity.User;
 import fr.doranco.reservations.entity.UserDojo;
 import fr.doranco.reservations.model.session.HibernateConnector;
 
@@ -11,8 +8,9 @@ public class UserDao implements IUserDao {
 
 	private Session session = HibernateConnector.getInstance().getSession();
 	@Override
+
 	public UserDojo getUserById(Integer id) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
