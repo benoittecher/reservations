@@ -61,7 +61,7 @@ public class UserDojo implements Serializable{
 	private String roles;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "addresse_id")
+	@JoinColumn(name = "adresse_id")
 	private Adresse adresse;
 	
 	@NotEmpty

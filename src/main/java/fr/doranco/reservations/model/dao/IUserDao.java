@@ -5,6 +5,7 @@ import fr.doranco.reservations.entity.UserDojo;
 public interface IUserDao {
 
 	UserDojo getUserById(Integer id);
+	UserDojo getUserByLogin(String login);
 	UserDojo addUser(UserDojo userDojo);
 	void updateUser(UserDojo userDojo);
 	void removeUser(UserDojo userDojo);

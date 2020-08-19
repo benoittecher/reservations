@@ -45,9 +45,18 @@ public class UserControl implements IUserControl{
 	}
 
 	@Override
-	public void seConnecter(String login, String password) {
-		// TODO Auto-generated method stub
-		
+	public boolean seConnecter(String login, String password) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException {
+
+		UserDojo userDojo = userDao.getUserByLogin(login);
+		if (userDojo != null) {
+			byte[] encodedPassword = userDojo.getPassword();
+			SecretKey key = new SecretKeySpec(encodedPassword, 0, encodedPassword.length, "DES");
+			String decodedPassword = CryptageDES.decrypt(userDojo.getPassword(), key);
+			if (decodedPassword == password) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

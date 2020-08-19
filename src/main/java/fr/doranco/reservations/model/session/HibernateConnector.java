@@ -22,11 +22,16 @@ public class HibernateConnector {
 	
 	private HibernateConnector() {
 		try {
-			config = new Configuration().configure(); // pour chercher par defaut le fichier "hibernate.cfg.xml" dans le dossier resources
-			StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
-			serviceRegistryBuilder.applySettings(config.getProperties());
-			serviceRegistry = serviceRegistryBuilder.build();
-			sessionFactory = config.buildSessionFactory(serviceRegistry);
+			// avec Hibernate 4
+//			config = new Configuration().configure(); // pour chercher par defaut le fichier "hibernate.cfg.xml" dans le dossier resources
+//			StandardServiceRegistryBuilder serviceRegistryBuilder = new StandardServiceRegistryBuilder();
+//			serviceRegistryBuilder.applySettings(config.getProperties());
+//			serviceRegistry = serviceRegistryBuilder.build();
+//			sessionFactory = config.buildSessionFactory(serviceRegistry);
+
+			// avec Hibernate 5
+			sessionFactory = new Configuration().configure().buildSessionFactory();
+			
 		}catch(Throwable ex) {
 			System.out.println("Echec de la création et de l'initialisation de la sessionFactory");
 			System.out.println(ex);
