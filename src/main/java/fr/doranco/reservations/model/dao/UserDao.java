@@ -1,6 +1,8 @@
 package fr.doranco.reservations.model.dao;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import fr.doranco.reservations.entity.UserDojo;
 import fr.doranco.reservations.model.session.HibernateConnector;
 
