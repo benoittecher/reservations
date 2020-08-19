@@ -1,23 +1,21 @@
 package fr.doranco.reservations.model.dao;
 
 import org.hibernate.Session;
-import org.hibernate.Transaction;
-
-import fr.doranco.reservations.entity.User;
+import fr.doranco.reservations.entity.UserDojo;
 import fr.doranco.reservations.model.session.HibernateConnector;
 
 public class UserDao implements IUserDao {
 
 	private Session session = HibernateConnector.getInstance().getSession();
 	@Override
-	public User getUserById(Integer id) {
-		User user = session.get(User.class, id);
+
+	public UserDojo getUserById(Integer id) {
 		
 		return null;
 	}
 
 	@Override
-	public User addUser(User user) {
+	public UserDojo addUser(UserDojo user) {
 		
 //		user.setId(1);
 //		return user;
@@ -41,7 +39,7 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(UserDojo userDojo) {
 		// TODO Auto-generated method stub
 
 	}
@@ -60,7 +58,7 @@ public class UserDao implements IUserDao {
 	}
 
 	@Override
-	public void removeUser(User user) {
+	public void removeUser(UserDojo userDojo) {
 		// TODO Auto-generated method stub
 		
 	}
