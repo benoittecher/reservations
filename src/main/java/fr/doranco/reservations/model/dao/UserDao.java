@@ -19,25 +19,25 @@ public class UserDao implements IUserDao {
 	@Override
 	public User addUser(User user) {
 		
-		user.setId(1);
-		return user;
+//		user.setId(1);
+//		return user;
 		
-//		Transaction tx = null;
-//		try {
-//			tx = session.beginTransaction();
-//			session.save(user);
-//			tx.commit();
-//			return user;
-//		} catch (Exception e) {
-//			System.out.println("Erreur l'utilisateur n'a pas pu être enregistré");
-//			System.out.println(e);
-//			tx.rollback();
-//		} finally {
-//			if (session != null) {
-//				session.close();
-//			}
-//		}
-//		return null;
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(user);
+			tx.commit();
+			return user;
+		} catch (Exception e) {
+			System.out.println("Erreur l'utilisateur n'a pas pu être enregistré");
+			System.out.println(e);
+			tx.rollback();
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return null;
 	}
 
 	@Override
