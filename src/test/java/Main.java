@@ -18,10 +18,12 @@ public class Main {
 //		UserControl userControl = new UserControl();
 //		Adresse adresse1 = new Adresse(10, "Rue de la Paix", "Paris", "75001");
 //		
-//		User user1 = new User("Albert", "Camus","ge@key.com","jay","1234hh","");
+
+//		User user1 = new User("Francois", "Camus","ge@key.com","jay","1234hh","");
 //		user1.setAdresse(adresse1);
 //		userControl.addUser(user1);
 //		System.out.println(user1);
+//
 
 //		User user2 = new User("Paul", "Gilbert", "hey@hello.com","hello","HGF11","");
 //		user2.setAdresse(adresse1);
