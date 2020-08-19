@@ -1,26 +1,33 @@
-
-
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
-import fr.doranco.hibernate.entity.Personne;
-import fr.doranco.hibernate.util.Dates;
+import fr.doranco.reservations.control.UserControl;
+import fr.doranco.reservations.entity.Adresse;
 import fr.doranco.reservations.entity.User;
-import fr.doranco.reservations.model.dao.UserDao;
 import fr.doranco.reservations.model.session.HibernateConnector;
 
 
 public class Main {
 
 	public static void main(String[] args) {
+
+//		final Session session = HibernateConnector.getInstance().getSession();
+//		System.out.println("ma session : " + session);
+//		session.close();
+//		System.exit(0);
 		
-		UserDao userDao = new UserDao();
+		UserControl userControl = new UserControl();
+		Adresse adresse1 = new Adresse(10, "Rue de la Paix", "Paris", "75001");
 		
-//		User user1 = new User("Albert", "Camus","ge@key.com","jay","1234hh","");
+		User user1 = new User("Albert", "Camus","ge@key.com","jay","1234hh","");
+		user1.setAdresse(adresse1);
+		userControl.addUser(user1);
+		System.out.println(user1);
+
 //		User user2 = new User("Paul", "Gilbert", "hey@hello.com","hello","HGF11","");
-		Transaction tx;
-		Session session = HibernateConnector.getInstance().getSession();
-		System.out.println(session);
+//		user2.setAdresse(adresse1);
+//		userControl.addUser(user2);
+//		System.out.println(user2);
+
 		/*tx = session.beginTransaction();
 		session.save(user1);
 		session.save(user2);

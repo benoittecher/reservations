@@ -4,15 +4,19 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-
+@Entity
+@Table(name = "user", catalog = "reservation")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,36 +27,41 @@ public class User implements Serializable {
 	private Integer id;
 	
 	@NotEmpty
-	@Size(min = 2, max = 25, message = "la longeur du nom doit être comprise entre 2 et 25 caractère !")
-	@Column(name = "nom", length = 25, nullable = false)
+	@Size(min = 2, max = 45, message = "la longeur du nom doit être comprise entre 2 et 25 caractère !")
+	@Column(name = "nom", length = 45, nullable = false)
 	private String nom;
 	
 	@NotEmpty
-	@Size(min = 2, max = 25, message = "la longeur du prenom doit être comprise entre 2 et 35 caractère !")
-	@Column(name = "prenom", length = 35, nullable = false)
+	@Size(min = 2, max = 45, message = "la longeur du prenom doit être comprise entre 2 et 35 caractère !")
+	@Column(name = "prenom", length = 45, nullable = false)
 	private String prenom;
 	
 	@NotEmpty
-	@Column(name = "email", length = 25, nullable = false)
+	@Column(name = "email", length = 45, nullable = false)
 	private String email;
 	
 	@NotEmpty
 	@Size(min = 2, max = 25, message = "la longeur du login doit être comprise entre 2 et 25 caractère !")
-	@Column(name = "login", length = 25, nullable = false)
+	@Column(name = "login", length = 45, nullable = false)
 	private String login;
 	
 	@NotEmpty
 	@Size(min = 2, max = 10, message = "le mot de passe doit être compris entre 2 et 10 caractère !")
-	@Column(name = "password", length = 25, nullable = false)
+	@Column(name = "password", length = 45, nullable = false)
 	private String password;
 	
 	@NotEmpty
-	@Size(min = 2, max = 25, message = "la taille du telephone doit être comprise entre 2 et 25 caractère !")
-	@Column(name = "telephone", length = 25, nullable = false)
+	@Size(min = 2, max = 13, message = "la taille du telephone doit être comprise entre 2 et 25 caractère !")
+	@Column(name = "telephone", length = 13, nullable = false)
 	private String telephone;
+	@NotEmpty
+	@Size( max = 45)
+	@Column(name = "roles", length = 45, nullable = false)
+	private String roles;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id")
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "addresse_id")
 	private Adresse adresse;
 	
 	
@@ -153,7 +162,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", login=" + login
-				+ ", password=" + password + ", telephone=" + telephone + ", adresse=" + adresse + "]";
+				+ ", password=" + password + ", telephone=" + telephone + ", adresse=" + adresse.toString() + "]";
 	}
 	
 	

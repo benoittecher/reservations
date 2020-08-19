@@ -2,16 +2,42 @@ package fr.doranco.reservations.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "adresse", catalog = "reservation")
 public class Adresse implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
 	
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", length = 11)
 	private Integer id;
+	@NotEmpty
+	@Size(max = 45)
+	@Column(name = "numero", length = 45, nullable = false)
 	private Integer numero;
+	@NotEmpty
+	@Size(max = 45)
+	@Column(name = "rue", length = 45, nullable = false)
 	private String rue;
+	@NotEmpty
+	@Size(max = 45)
+	@Column(name = "ville", length = 45, nullable = false)
 	private String ville;
+	@NotEmpty
+	@Size(min = 5, max = 6)
+	@Column(name = "code_postal", length = 45, nullable = false)
 	private String codePostal;
 	
 	
