@@ -22,7 +22,7 @@
 
 		</h2>
 		<table>
-			<h:inputHidden value = "#{userbean.idUser}" id = "hiddenField" />
+			<h:inputHidden value = "#{userbean.id}" id = "hiddenField" />
 			<tr>
 				<td>Prénom:</td>
 				<td><h:inputText value="#{userbean.prenom}" required="true" id="prenom">
@@ -84,7 +84,7 @@
 
 		<p>
 			<h:commandButton value="Inscription" action="#{userbean.addUser()}" />
-			<h:commandButton value="Initialiser" action="#{userbean}" />
+<!-- 			<h:commandButton value="Initialiser" action="" /> -->
 		</p>
 		
 <!-- 		<c:choose> -->

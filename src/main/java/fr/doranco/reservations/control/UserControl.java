@@ -13,13 +13,14 @@ import fr.doranco.reservations.cryptage.CryptageDES;
 import fr.doranco.reservations.cryptage.GenerateKey;
 import fr.doranco.reservations.entity.User;
 import fr.doranco.reservations.entity.UserDojo;
+import fr.doranco.reservations.model.dao.IUserDao;
 import fr.doranco.reservations.model.dao.UserDao;
 import fr.doranco.reservations.utils.exceptions.UnavailableLoginException;
 
 
 public class UserControl implements IUserControl{
 	//SecretKey key = GenerateKey.getKey("DES", 56);
-	UserDao userDao = new UserDao();
+	IUserDao userDao = new UserDao();
 	@Override
 	public User getUserById(Integer id) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException {
 		return convertToPojo(userDao.getUserById(id));
