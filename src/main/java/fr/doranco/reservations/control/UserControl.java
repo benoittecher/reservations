@@ -13,10 +13,11 @@ import fr.doranco.reservations.cryptage.GenerateKey;
 import fr.doranco.reservations.entity.User;
 import fr.doranco.reservations.entity.UserDojo;
 import fr.doranco.reservations.model.dao.UserDao;
+import fr.doranco.reservations.utils.exceptions.UnavailableLoginException;
 
 
 public class UserControl implements IUserControl{
-
+	//SecretKey key = GenerateKey.getKey("DES", 56);
 	UserDao userDao = new UserDao();
 	@Override
 	public User getUserById(Integer id) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException {
@@ -24,12 +25,17 @@ public class UserControl implements IUserControl{
 	}
 
 	@Override
-	public User addUser(User user) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException {
+	public User addUser(User user) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException, UnavailableLoginException {
+		if (alreadyUsedLogin(user.getLogin())) {
+			throw new UnavailableLoginException("Login déjà utilisé ; veuillez saisir un login différent.");
+			
+		} else {
 		UserDojo userDojo = convertToDojo(user);
 		return convertToPojo(userDao.addUser(userDojo));
+		}
 		
 	}
-
+	
 	@Override
 	public void updateUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException {
 		UserDojo userDojo = convertToDojo(user);
@@ -43,7 +49,17 @@ public class UserControl implements IUserControl{
 		userDao.removeUser(userDojo);
 		
 	}
-
+	/**
+	 * 
+	 * @param login
+	 * @return true si le login est déjà enregistré en bdd, false sinon
+	 */
+	private boolean alreadyUsedLogin(String login) {
+		if (userDao.getUserByLogin(login) != null) {
+			return true;
+		}
+		return false;
+	}
 	@Override
 	public boolean seConnecter(String login, String password) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException {
 
@@ -82,9 +98,8 @@ public class UserControl implements IUserControl{
 		user.setTelephone(userDojo.getTelephone());
 		user.setRoles(userDojo.getRoles());
 		user.setAdresse(userDojo.getAdresse());
-		byte[] encodedPassword = userDojo.getPassword();
-		SecretKey key = new SecretKeySpec(encodedPassword, 0, encodedPassword.length, "DES");
-		String password = CryptageDES.decrypt(userDojo.getPassword(), key);
+		SecretKey keyFromBytes = new SecretKeySpec(userDojo.getCleCryptage(), "DES");
+		String password = CryptageDES.decrypt(userDojo.getPassword(), keyFromBytes);
 		user.setPassword(password);
 		return user;
 		

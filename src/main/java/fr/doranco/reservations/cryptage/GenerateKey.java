@@ -7,7 +7,6 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 public abstract class GenerateKey {
-
 	public final static SecretKey getKey(String algorithm, int keysize) throws NoSuchAlgorithmException, GeneralSecurityException {
 		
 		KeyGenerator keyGen = KeyGenerator.getInstance(algorithm);
