@@ -3,6 +3,7 @@ package fr.doranco.reservations.control;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.crypto.NoSuchPaddingException;
 
@@ -16,4 +17,5 @@ public interface IUserControl {
 	void removeUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException;
 	boolean seConnecter(String login, String password) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException;
 	void seDeconnecter();
+	List<User> getUsers();
 }

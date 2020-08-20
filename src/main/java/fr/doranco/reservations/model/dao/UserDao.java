@@ -1,6 +1,8 @@
 package fr.doranco.reservations.model.dao;
 
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -69,6 +71,12 @@ public class UserDao implements IUserDao {
 	public void removeUser(UserDojo userDojo) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<UserDojo> getUsers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

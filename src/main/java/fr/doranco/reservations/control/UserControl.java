@@ -3,6 +3,7 @@ package fr.doranco.reservations.control;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
@@ -103,5 +104,11 @@ public class UserControl implements IUserControl{
 		user.setPassword(password);
 		return user;
 		
+	}
+
+	@Override
+	public List<User> getUsers() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
