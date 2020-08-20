@@ -43,7 +43,7 @@
 			<tr>
 				<td>Email :</td>
 				<td>
-					<h:inputText value="#{userbean.email}" required="true" id="login">
+					<h:inputText value="#{userbean.email}" required="true" id="email">
 						<f:validateLength minimum="2" maximum="10" />
 					</h:inputText>
 					<h:message for="email" style="color:red" />
@@ -66,7 +66,7 @@
 					<h:inputText value="#{userbean.password}" required="true" id="password">
 						<f:validateLength minimum="2" maximum="10" />
 					</h:inputText>
-					<h:message for="^password" style="color:red" />
+					<h:message for="password" style="color:red" />
 				</td>
 			</tr>
 			
@@ -83,7 +83,7 @@
 		</table>
 
 		<p>
-			<h:commandButton value="Inscription" action="#{userbean}" />
+			<h:commandButton value="Inscription" action="#{userbean.addUser()}" />
 			<h:commandButton value="Initialiser" action="#{userbean}" />
 		</p>
 		
@@ -96,60 +96,60 @@
 <!-- 		</c:choose> -->
 		
 		
-		<h:form>
-			<h4>Liste des participants inscrits</h4>
+<!-- 		<h:form> -->
+<!-- 			<h4>Liste des participants inscrits</h4> -->
 
-			<h:dataTable value="#{userbean.listUsers}" var="ob"
-				styleClass="order-table" headerClass="order-table-header"
-				rowClasses="order-table-odd-row,order-table-even-row">
+<!-- 			<h:dataTable value="#{userbean.listUsers}" var="ob" -->
+<!-- 				styleClass="order-table" headerClass="order-table-header" -->
+<!-- 				rowClasses="order-table-odd-row,order-table-even-row"> -->
 				
-				<h:column>
-				<!-- column header -->
-				<f:facet name="header">id</f:facet>
-				<!-- row record -->
-				<h:outputText value="#{ob.id}" />
-			</h:column>
-				<h:column>
-					<!-- Column header -->
-					<f:facet name="header">Prenom</f:facet>
-					<!-- row record -->
-					<h:outputText value="#{ob.prenom}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Nom</f:facet>
-					<h:outputText value="#{ob.nom}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Email</f:facet>
-					<h:outputText value="#{ob.email}" />
-				</h:column>
+<!-- 				<h:column> -->
+<!-- 				column header -->
+<!-- 				<f:facet name="header">id</f:facet> -->
+<!-- 				row record -->
+<!-- 				<h:outputText value="#{ob.id}" /> -->
+<!-- 			</h:column> -->
+<!-- 				<h:column> -->
+<!-- 					Column header -->
+<!-- 					<f:facet name="header">Prenom</f:facet> -->
+<!-- 					row record -->
+<!-- 					<h:outputText value="#{ob.prenom}" /> -->
+<!-- 				</h:column> -->
+<!-- 				<h:column> -->
+<!-- 					<f:facet name="header">Nom</f:facet> -->
+<!-- 					<h:outputText value="#{ob.nom}" /> -->
+<!-- 				</h:column> -->
+<!-- 				<h:column> -->
+<!-- 					<f:facet name="header">Email</f:facet> -->
+<!-- 					<h:outputText value="#{ob.email}" /> -->
+<!-- 				</h:column> -->
 				
-				<h:column>
-					<f:facet name="header">Telephone</f:facet>
-					<h:outputText value="#{ob.telephone}" />
-				</h:column>
+<!-- 				<h:column> -->
+<!-- 					<f:facet name="header">Telephone</f:facet> -->
+<!-- 					<h:outputText value="#{ob.telephone}" /> -->
+<!-- 				</h:column> -->
 				
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandLink value="supprimer" 
-					 action="#{userbean}" />
-				</h:column>
+<!-- 				<h:column> -->
+<!-- 					<f:facet name="header">Action</f:facet> -->
+<!-- 					<h:commandLink value="supprimer"  -->
+<!-- 					 action="#{userbean}" /> -->
+<!-- 				</h:column> -->
 				
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandButton value="supprimer" 
-					 action="#{userbean}" />
-				</h:column>
+<!-- 				<h:column> -->
+<!-- 					<f:facet name="header">Action</f:facet> -->
+<!-- 					<h:commandButton value="supprimer"  -->
+<!-- 					 action="#{userbean}" /> -->
+<!-- 				</h:column> -->
 				
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandButton value="Update" 
-					 action="#{userbean}" />
-				</h:column>
+<!-- 				<h:column> -->
+<!-- 					<f:facet name="header">Action</f:facet> -->
+<!-- 					<h:commandButton value="Update"  -->
+<!-- 					 action="#{userbean}" /> -->
+<!-- 				</h:column> -->
 				
-			</h:dataTable>
+<!-- 			</h:dataTable> -->
 
-		</h:form>
+<!-- 		</h:form> -->
 	</h:form>
 </body>
 

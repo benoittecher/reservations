@@ -2,14 +2,14 @@ package fr.doranco.reservations.beans;
 
 import java.io.Serializable;
 
-import javax.annotation.ManagedBean;
-import javax.faces.annotation.ManagedProperty;
-import javax.faces.annotation.SessionMap;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 import fr.doranco.reservations.entity.Adresse;
 
-@ManagedBean(value = "userbean")
-@SessionMap
+@ManagedBean
+@SessionScoped
 public class UserBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;
