@@ -7,6 +7,6 @@
 <title>Reservation</title>
 </head>
 <body>
-	<jsp:forward page="/faces/main.xhtml"></jsp:forward>
+	<jsp:forward page="/faces/formulaire.xhtml"></jsp:forward>
 </body>
 </html>
