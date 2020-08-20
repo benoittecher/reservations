@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
@@ -18,11 +17,10 @@
 <body>
 
 	<h:form>
-		<h4>
-			Formulaire JSF d'inscription à l <a
-				href="https://www.doranco.fr/candidature/parcours/41">Ecole
-				DORANCO </a>
-		</h4>
+		<h2>
+			Formulaire d'inscription pour reserver un vol
+
+		</h2>
 		<table>
 			<h:inputHidden value = "#{userbean.idUser}" id = "hiddenField" />
 			<tr>
@@ -43,106 +41,59 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Sexe :</td>
-				<td>
-					<h:selectOneRadio value="#{userbean.genre}" required="true" id="genre" >
-						<f:selectItem itemLabel="Homme" itemValue="homme" />
-						<f:selectItem itemLabel="Femme" itemValue="femme" />
-						<h:message for="genre" style="color:red"/>
-					</h:selectOneRadio>
-					<h:message for="genre" />
-				</td>
-
-			</tr>
-			<tr>
-				<td>Date de naissance :</td>
-				<td><h:inputText value="#{userbean.dateNaissance}"
-						required="true" id="dateNaissance"> 
-<!-- 						<f:convertDateTime pattern = "dd/MM/yyyy"/> -->
-						</h:inputText> (mm/dd/yyyy)
-						<h:message for="dateNaissance" style="color:red"/>
-				</td>		
-			</tr>
-			<tr>
 				<td>Email :</td>
-				<td><h:inputText value="#{userbean.email}" required="true"
-						id="email">
-					</h:inputText> 
-					<h:message for="email" style="color:red" /></td>
-			</tr>
-			<tr>
-				<td>Qualité de service :</td>
 				<td>
-					<h:selectOneMenu value="#{userbean.qualiteDeService}">
-						<f:selectItem itemLabel="Basic" itemValue="basic" />
-						<f:selectItem itemLabel="premium" itemValue="medium" />
-						<f:selectItem itemLabel="Premium" itemValue="premium" />
-					</h:selectOneMenu>
+					<h:inputText value="#{userbean.email}" required="true" id="login">
+						<f:validateLength minimum="2" maximum="10" />
+					</h:inputText>
+					<h:message for="email" style="color:red" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>login :</td>
+				<td>
+					<h:inputText value="#{userbean.login}" required="true" id="login">
+						<f:validateLength minimum="2" maximum="10" />
+					</h:inputText>
+					<h:message for="login" style="color:red" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>Password :</td>
+				<td>
+					<h:inputText value="#{userbean.password}" required="true" id="password">
+						<f:validateLength minimum="2" maximum="10" />
+					</h:inputText>
+					<h:message for="^password" style="color:red" />
 				</td>
 			</tr>
 			
 			<tr>
 				<td>Telephone :</td>
-				<td><h:inputText value="#{userbean.telephone}" required="true"
-						id="telephone" /> <h:message for="telephone" /></td>
-			</tr>
-			
-			<tr>
-				<td>Fonction actuelle :</td>
-				<td><h:selectOneMenu value="#{userbean.fonctionActuelle}">
-						<f:selectItem itemLabel="Agent de service" itemValue="Agent de service" />
-						<f:selectItem itemLabel="Technicien" itemValue="technicien" />
-						<f:selectItem itemLabel="Caissier" itemValue="caissier" />
-						<f:selectItem itemLabel="En chomage" itemValue="En chomage" />
-						<f:selectItem itemLabel="Autre" itemValue="autre" />
-					</h:selectOneMenu></td>
-			</tr>
-			
-			<tr>
-				<td>Disponibilité :</td>
 				<td>
-					<h:selectOneRadio value="#{userbean.disponibilite}" required="true" id="disponible" >
-						<f:selectItem itemLabel="Oui" itemValue="Oui" />
-						<f:selectItem itemLabel="Non" itemValue="Non" />
-					</h:selectOneRadio>
-					<h:message for="disponibilite" style="color:red" />
-				</td>
-
-			</tr>
-			
-			<tr>
-				<td>Nombre d'années d'expérience :</td>
-				<td>
-					<h:inputText value="#{userbean.nbAnneeExp}" required="true" id="nbAnneeExp">
-						<f:validateLongRange minimum= "1" maximum="20" />
-					</h:inputText> 
-					<h:message for="nbAnneeExp" style="color:red" />
+					<h:inputText value="#{userbean.telephone}" required="true" id="telephone">
+						<f:validateLength minimum="2" maximum="10" />
+					</h:inputText>
+					<h:message for="telephone" style="color:red" />
 				</td>
 			</tr>
 			
-			<tr>
-				<td>Langages souhaités :</td>
-				<td>
-					<h:inputText value="#{userbean.langageSouhaites}" required="true" id="langagesSouhaites">
-<!-- 						<f:validateLongRange minimum= "1" maximum="20" /> -->
-					</h:inputText> 
-					<h:message for="langagesSouhaites" style="color:red" />
-				</td>
-			</tr>
 		</table>
 
 		<p>
-			<h:commandButton value="Inscription" action="#{userbean.addUser()}" />
-			<h:commandButton value="Initialiser" action="#{userbean.initialize()}" />
+			<h:commandButton value="Inscription" action="#{userbean}" />
+			<h:commandButton value="Initialiser" action="#{userbean}" />
 		</p>
 		
-		<c:choose>
-			<c:when test="#{userbean.messageSuccess != ''}">
-            	<h:outputText value="#{userbean.messageSuccess}" style="color:green"/>
-         	</c:when>
-			<c:otherwise>
-         	</c:otherwise>
-		</c:choose>
+<!-- 		<c:choose> -->
+<!-- 			<c:when test="#{userbean.messageSuccess != ''}"> -->
+<!--             	<h:outputText value="#{userbean.messageSuccess}" style="color:green"/> -->
+<!--          	</c:when> -->
+<!-- 			<c:otherwise> -->
+<!--          	</c:otherwise> -->
+<!-- 		</c:choose> -->
 		
 		
 		<h:form>
@@ -172,15 +123,6 @@
 					<f:facet name="header">Email</f:facet>
 					<h:outputText value="#{ob.email}" />
 				</h:column>
-				<h:column>
-					<f:facet name="header">Date de Naissance</f:facet>
-					<h:outputText value="#{ob.dateNaissance}" />
-<!-- 					<f:convertDateTime pattern ="dd/MM/yyyy"/> -->
-				</h:column>
-				<h:column>
-					<f:facet name="header">Niveau de Service</f:facet>
-					<h:outputText value="#{ob.qualiteDeService}" />
-				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Telephone</f:facet>
@@ -188,41 +130,21 @@
 				</h:column>
 				
 				<h:column>
-					<f:facet name="header">Fonction actuelle</f:facet>
-					<h:outputText value="#{ob.fonctionActuelle}" />
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Disponibilité</f:facet>
-					<h:outputText value="#{ob.disponibilite}" />
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Langages Souhaites</f:facet>
-					<h:outputText value="#{ob.langageSouhaites}" />
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Nb années d'expérience</f:facet>
-					<h:outputText value="#{ob.nbAnneeExp}" />
-				</h:column>
-				
-				<h:column>
 					<f:facet name="header">Action</f:facet>
 					<h:commandLink value="supprimer" 
-					 action="#{userbean.deleteUser(ob)}" />
+					 action="#{userbean}" />
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Action</f:facet>
 					<h:commandButton value="supprimer" 
-					 action="#{userbean.deleteUser(ob)}" />
+					 action="#{userbean}" />
 				</h:column>
 				
 				<h:column>
 					<f:facet name="header">Action</f:facet>
 					<h:commandButton value="Update" 
-					 action="#{userbean.updateUser(ob)}" />
+					 action="#{userbean}" />
 				</h:column>
 				
 			</h:dataTable>
