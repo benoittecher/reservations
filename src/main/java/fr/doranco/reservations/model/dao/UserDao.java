@@ -7,7 +7,6 @@ import org.hibernate.Transaction;
 import fr.doranco.reservations.entity.UserDojo;
 import fr.doranco.reservations.model.session.HibernateConnector;
 
-
 public class UserDao implements IUserDao {
 
 	private Session session = HibernateConnector.getInstance().getSession();

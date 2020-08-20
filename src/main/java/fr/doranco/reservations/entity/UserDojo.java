@@ -1,6 +1,7 @@
 package fr.doranco.reservations.entity;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -124,6 +125,13 @@ public class UserDojo implements Serializable{
 		this.telephone = telephone;
 	}
 
+	@Override
+	public String toString() {
+		return "UserDojo [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", login=" + login
+				+ ", password=" + Arrays.toString(password) + ", telephone=" + telephone + ", roles=" + roles
+				+ ", adresse=" + adresse + ", cleCryptage=" + Arrays.toString(cleCryptage) + "]";
+	}
+
 	public String getRoles() {
 		return roles;
 	}
@@ -150,6 +158,9 @@ public class UserDojo implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	public UserDojo() {
+		
 	}
 
 	public UserDojo(Integer id,
