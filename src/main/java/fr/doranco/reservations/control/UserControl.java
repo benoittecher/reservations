@@ -3,6 +3,7 @@ package fr.doranco.reservations.control;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.crypto.NoSuchPaddingException;
@@ -28,12 +29,14 @@ public class UserControl implements IUserControl{
 
 	@Override
 	public User addUser(User user) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException, UnavailableLoginException {
-		if (alreadyUsedLogin(user.getLogin())) {
+		
+		UserDojo addedUserDojo = userDao.getUserByLogin(user.getLogin());
+		if (addedUserDojo != null) {
 			throw new UnavailableLoginException("Login déjà utilisé ; veuillez saisir un login différent.");
-			
 		} else {
-		UserDojo userDojo = convertToDojo(user);
-		return convertToPojo(userDao.addUser(userDojo));
+			UserDojo userDojo = convertToDojo(user);
+			addedUserDojo = userDao.addUser(userDojo);
+			return convertToPojo(addedUserDojo);
 		}
 		
 	}
@@ -67,10 +70,13 @@ public class UserControl implements IUserControl{
 
 		UserDojo userDojo = userDao.getUserByLogin(login);
 		if (userDojo != null) {
+			
 			byte[] encodedPassword = userDojo.getPassword();
-			SecretKey key = new SecretKeySpec(encodedPassword, 0, encodedPassword.length, "DES");
-			String decodedPassword = CryptageDES.decrypt(userDojo.getPassword(), key);
-			if (decodedPassword == password) {
+			SecretKey keyFromBytes = new SecretKeySpec(userDojo.getCleCryptage(), "DES");
+			String decodedPassword = CryptageDES.decrypt(encodedPassword, keyFromBytes);
+			System.out.println("decodedPassword = " + decodedPassword);
+			System.out.println("password = " + password);
+			if (decodedPassword.equals(password)) {
 				return true;
 			}
 		}
@@ -108,8 +114,13 @@ public class UserControl implements IUserControl{
 	}
 
 	@Override
-	public List<User> getUsers() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> getUsers() throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException {
+		List<User> users = new ArrayList<User>();
+		List<UserDojo> usersDojo = userDao.getUsers();
+		for (UserDojo userDojo : usersDojo) {
+			User user = convertToPojo(userDojo);
+			users.add(user);
+		}
+		return users;
 	}
 }

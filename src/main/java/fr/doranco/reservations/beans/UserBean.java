@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.crypto.NoSuchPaddingException;
@@ -32,7 +33,7 @@ public class UserBean implements Serializable{
 	@ManagedProperty(value="Washington")
 	private String prenom;
 	
-	@ManagedProperty(value="wash@hello.com")
+	@ManagedProperty(value="a@b.fr")
 	private String email;
 	
 	@ManagedProperty(value="Denzton")
@@ -44,8 +45,18 @@ public class UserBean implements Serializable{
 	@ManagedProperty(value="0798097654")
 	private String telephone;
 	
-	@ManagedProperty(value="")
-	private Adresse adresse;
+	@ManagedProperty(value="1")
+	private String adresseNumero;
+	
+	@ManagedProperty(value="Rue de la Paix")
+	private String adresseRue;
+	
+
+	@ManagedProperty(value="Paris")
+	private String adresseVille;
+	
+	@ManagedProperty(value="75001")
+	private String adresseCodePostal;
 
 	@ManagedProperty(name = "messageSuccess", value = "")
 	private String messageSuccess = "";
@@ -55,23 +66,27 @@ public class UserBean implements Serializable{
 
 	private static final IUserControl userControl = new UserControl();
 	
-	private static List<User> listUsers = getUsers();
-	
-	public List<User> getListUsers() {
-		initialize();
-		return listUsers;
-	}
+//	private final List<User> listUsers = getUsers();
+	private static final List<User> listUsers = new ArrayList<User>(Arrays.asList(
+				new User("test1", "test2", "test3", "test4", "test5", "test6", "test7"))
+			);
 
 	public UserBean() {
 	}
 	
-	private static List<User> getUsers() {
+	private List<User> getUsers() {
 		
-		List<User> listeUsers = userControl.getUsers();
-		return listeUsers;
+		try {
+			return userControl.getUsers();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			setMessageError("erreur lors de la récupération de la liste des users !!");
+			return null;
+		}
 	}
 
-	public String addUser() {
+	public void addUser() {
 		//initializeMessages();
 		User user = new User();
 		user.setNom(nom);
@@ -81,45 +96,75 @@ public class UserBean implements Serializable{
 		user.setPassword(password);
 		user.setTelephone(telephone);
 		user.setRoles("user");
-		User addedUser = null;
+		
 		Adresse addedAdresse = new Adresse();
-		addedAdresse.setNumero(adresse.getNumero());
-		addedAdresse.setRue(adresse.getRue());
-		addedAdresse.setVille(adresse.getVille());
-		addedAdresse.setCodePostal(adresse.getCodePostal());
+		addedAdresse.setNumero(Integer.parseInt(adresseNumero));
+		addedAdresse.setRue(adresseRue);
+		addedAdresse.setVille(adresseVille);
+		addedAdresse.setCodePostal(adresseCodePostal);
 		user.setAdresse(addedAdresse);
 		try {
-			addedUser = userControl.addUser(user);
+			User addedUser = userControl.addUser(user);
+			if (addedUser != null && addedUser.getId() != null) {
+				messageSuccess = "Utilisateur ajouté avec succès.";
+				return;
+			}
+			messageError = "Erreur lors de l'ajout de l'utilisateur !!";
+			return;
+				
 		} catch (NoSuchAlgorithmException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return messageError;
+			
 		} catch (NoSuchPaddingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return messageError;
+			
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return messageError;
+			
 		} catch (GeneralSecurityException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UnavailableLoginException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return messageError;
+			
 		}
-			messageSuccess = "Utilisateur ajouté avec succès.";
+			
 		 
-		return messageSuccess;
+		
+	}
+	public void seConnecter() {
+		try {
+			if (userControl.seConnecter(login, password)) {
+			messageSuccess = "Vous êtes bien connecté";
+			messageError = "";
+			} else {
+				messageError = "Echec lors de la connexion";
+				messageSuccess = "";
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (GeneralSecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-		public String initialize() {
-			initializeMessages();
-			//initializeFields();
-			return "";
-		}
+	public String initialize() {
+		initializeMessages();
+		//initializeFields();
+		return "";
+	}
 
 	private void initializeMessages() {
 		messageSuccess = "";
@@ -208,21 +253,8 @@ public class UserBean implements Serializable{
 	}
 
 
-
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
-	}
-
-
-
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-
-
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
 	}
 	
 	
@@ -247,16 +279,42 @@ public class UserBean implements Serializable{
 	public void setMessageError(String messageError) {
 		this.messageError = messageError;
 	}
+	public String getAdresseNumero() {
+		return adresseNumero;
+	}
 
+	public void setAdresseNumero(String adresseNumero) {
+		this.adresseNumero = adresseNumero;
+	}
 
+	public String getAdresseRue() {
+		return adresseRue;
+	}
 
+	public void setAdresseRue(String adresseRue) {
+		this.adresseRue = adresseRue;
+	}
 
+	public String getAdresseVille() {
+		return adresseVille;
+	}
 
+	public void setAdresseVille(String adresseVille) {
+		this.adresseVille = adresseVille;
+	}
 
-	
-	
-	
-	
+	public String getAdresseCodePostal() {
+		return adresseCodePostal;
+	}
+
+	public void setAdresseCodePostal(String adresseCodePostal) {
+		this.adresseCodePostal = adresseCodePostal;
+	}
+
+	public List<User> getListUsers() {
+		return listUsers;
+	}
+
 	
 	
 }

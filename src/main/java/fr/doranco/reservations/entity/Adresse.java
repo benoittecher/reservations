@@ -25,22 +25,23 @@ public class Adresse implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", length = 11)
 	private Integer id;
-	@NotEmpty
-	@Size(max = 45)
+
+//	@Size(min = 0, max = 45)
 	@Column(name = "numero", length = 45, nullable = false)
 	private Integer numero;
-	@NotEmpty
-	@Size(max = 45)
+	
+//	@Size(min = 0, max = 45)
 	@Column(name = "rue", length = 45, nullable = false)
 	private String rue;
-	@NotEmpty
-	@Size(max = 45)
+	
+//	@Size(max = 45)
 	@Column(name = "ville", length = 45, nullable = false)
 	private String ville;
-	@NotEmpty
-	@Size(min = 5, max = 6)
+	
+//	@Size(min = 5, max = 6)
 	@Column(name = "code_postal", length = 45, nullable = false)
 	private String codePostal;
+	
 	@OneToMany(mappedBy="adresse")
 	private List<UserDojo> userDojo;
 	

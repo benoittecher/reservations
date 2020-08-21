@@ -17,5 +17,5 @@ public interface IUserControl {
 	void removeUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException, GeneralSecurityException;
 	boolean seConnecter(String login, String password) throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException;
 	void seDeconnecter();
-	List<User> getUsers();
+	List<User> getUsers() throws NoSuchAlgorithmException, NoSuchPaddingException, UnsupportedEncodingException, GeneralSecurityException;
 }

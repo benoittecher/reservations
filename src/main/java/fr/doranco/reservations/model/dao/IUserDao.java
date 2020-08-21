@@ -4,6 +4,8 @@ import java.util.List;
 
 import fr.doranco.reservations.entity.UserDojo;
 
+
+
 public interface IUserDao {
 
 	UserDojo getUserById(Integer id);
