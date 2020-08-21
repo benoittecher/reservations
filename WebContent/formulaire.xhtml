@@ -79,6 +79,39 @@
 					<h:message for="telephone" style="color:red" />
 				</td>
 			</tr>
+			<h3>Adresse</h3>
+			<tr>
+				<td>Numero</td>
+				<td>
+					<h:inputText value="#{userbean.adresse.numero}" required="true" id="adresseNumero">
+						<f:validateLength minimum="1" maximum="10" />
+					</h:inputText>
+					<h:message for="adresseNumero" style="color:red" />
+				</td>
+				<td>Rue</td>
+				<td>
+					<h:inputText value="#{userbean.adresse.rue}" required="true" id="adresseRue">
+						<f:validateLength minimum="1" maximum="45" />
+					</h:inputText>
+					<h:message for="adresseRue" style="color:red" />
+				</td>
+				<td>Ville</td>
+				<td>
+					<h:inputText value="#{userbean.adresse.ville}" required="true" id="adresseVille">
+						<f:validateLength minimum="1" maximum="45" />
+					</h:inputText>
+					<h:message for="adresseVille" style="color:red" />
+				</td>
+				
+				<td>Code Postal</td>
+				<td>
+					<h:inputText value="#{userbean.adresse.codePostal}" required="true" id="adresseCodePostal">
+						<f:validateLength minimum="1" maximum="10" />
+					</h:inputText>
+					<h:message for="adresseCodePostal" style="color:red" />
+				</td>
+			</tr>
+			
 			
 		</table>
 
