@@ -26,22 +26,22 @@ public class UserBean implements Serializable{
 
 	public String id;
 	
-	@ManagedProperty(value="NOM")
+	@ManagedProperty(value="denzel")
 	private String nom;
 	
-	@ManagedProperty(value="PRENOM")
+	@ManagedProperty(value="Washington")
 	private String prenom;
 	
-	@ManagedProperty(value="")
+	@ManagedProperty(value="wash@hello.com")
 	private String email;
 	
-	@ManagedProperty(value="")
+	@ManagedProperty(value="Denzton")
 	private String login;
 	
-	@ManagedProperty(value="")
+	@ManagedProperty(value="newyork")
 	private String password;
 	
-	@ManagedProperty(value="")
+	@ManagedProperty(value="0798097654")
 	private String telephone;
 	
 	@ManagedProperty(value="")
@@ -55,9 +55,20 @@ public class UserBean implements Serializable{
 
 	private static final IUserControl userControl = new UserControl();
 	
-	private static List<User> listUsers = userControl.getUsers();
+	private static List<User> listUsers = getUsers();
+	
+	public List<User> getListUsers() {
+		initialize();
+		return listUsers;
+	}
 
 	public UserBean() {
+	}
+	
+	private static List<User> getUsers() {
+		
+		List<User> listeUsers = userControl.getUsers();
+		return listeUsers;
 	}
 
 	public String addUser() {
@@ -104,16 +115,16 @@ public class UserBean implements Serializable{
 		return messageSuccess;
 	}
 
-//	public String initialize() {
-//	initializeMessages();
-//	//initializeFields();
-//	return "";
-//}
-//
-//	private void initializeMessages() {
-//		messageSuccess = "";
-//		messageError = "";
-//	}
+		public String initialize() {
+			initializeMessages();
+			//initializeFields();
+			return "";
+		}
+
+	private void initializeMessages() {
+		messageSuccess = "";
+		messageError = "";
+	}
 
 	
 	public String getNom() {
@@ -130,13 +141,13 @@ public class UserBean implements Serializable{
 		this.id = id;
 	}
 
-	public static List<User> getListUsers() {
-		return listUsers;
-	}
-
-	public static void setListUsers(List<User> listUsers) {
-		UserBean.listUsers = listUsers;
-	}
+//	public static List<User> getListUsers() {
+//		return listUsers;
+//	}
+//
+//	public static void setListUsers(List<User> listUsers) {
+//		UserBean.listUsers = listUsers;
+//	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
